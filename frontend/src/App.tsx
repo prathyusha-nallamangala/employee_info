@@ -1,27 +1,46 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import AllTasksPage from './pages/AllTasksPage';
-import CompletedTasksPage from './pages/CompletedTasksPage';
-import PendingTasksPage from './pages/PendingTasksPage';
-import TaskForm from './components/TaskForm';
+import React from 'react';
+import ProductCard from './components/ProductCard';
 
 function App() {
+  // Example product data
+  const products = [
+    {
+      id: '1',
+      name: 'Smartphone X',
+      description: 'A powerful smartphone with a stunning display.',
+      price: 699.99,
+      imageUrl: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=SmartphoneX'
+    },
+    {
+      id: '2',
+      name: 'Wireless Headphones',
+      description: 'Immersive sound with comfortable earcups.',
+      price: 199.99,
+      imageUrl: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Headphones'
+    },
+    {
+      id: '3',
+      name: 'Smartwatch Pro',
+      description: 'Track your fitness and stay connected.',
+      price: 249.99,
+      imageUrl: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Smartwatch'
+    }
+  ];
+
   return (
-    <Router>
-      <div className="container mx-auto p-4 max-w-2xl bg-white shadow-lg rounded-lg">
-        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">Task Manager</h1>
-        <TaskForm />
-        <nav className="mb-6 flex justify-center space-x-4 bg-gray-50 p-2 rounded-md">
-          <Link to="/" className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-colors duration-200">All Tasks</Link>
-          <Link to="/pending" className="px-4 py-2 text-yellow-600 hover:text-yellow-800 hover:bg-yellow-50 rounded-md transition-colors duration-200">Pending</Link>
-          <Link to="/completed" className="px-4 py-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-colors duration-200">Completed</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<AllTasksPage />} />
-          <Route path="/pending" element={<PendingTasksPage />} />
-          <Route path="/completed" element={<CompletedTasksPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="min-h-screen bg-gray-100 p-4">
+      <header className="bg-white shadow p-6 mb-8 rounded-lg">
+        <h1 className="text-4xl font-bold text-gray-800 text-center">Mobile E-commerce</h1>
+      </header>
+      <main className="container mx-auto px-4">
+        <h2 className="text-3xl font-semibold text-gray-700 mb-6">Featured Products</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }
 
